@@ -72,7 +72,7 @@ typedef union page_directory_entry
 
    } __attribute__((packed)) page;
 
-   raw32_t;
+   raw32_t raw;
 
 } __attribute__((packed)) pde32_t;
 
@@ -94,7 +94,7 @@ typedef union page_table_entry
 
    } __attribute__((packed));
 
-   raw32_t;
+   raw32_t raw;
 
 } __attribute__((packed)) pte32_t;
 
@@ -142,17 +142,17 @@ typedef union page_table_entry
 #define pg_readable(_e_)             pg_present(_e_)
 #define pg_writable(_e_)             (pg_present(_e_) && ((_e_)->rw))
 #define pg_large(_e_)                ((_e_)->page.ps)
-#define pg_set_zero(_e_)                 ((_e_)->raw = 0)
+#define pg_set_zero(_e_)                 ((_e_)->raw.raw = 0)
 
 #define pg_set_entry(_e_,_attr_,_pfn_)          \
    ({                                           \
-      (_e_)->raw  = (_attr_)|PG_P;              \
+      (_e_)->raw.raw  = (_attr_)|PG_P;          \
       (_e_)->addr = _pfn_;                      \
    })
 
 #define pg_set_large_entry(_e_,_attr_,_pfn_)    \
    ({                                           \
-      (_e_)->raw       = (_attr_)|PG_PS|PG_P;   \
+      (_e_)->raw.raw       = (_attr_)|PG_PS|PG_P;   \
       (_e_)->page.addr = _pfn_;                 \
    })
 

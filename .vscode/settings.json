@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "system_error": "c",
-        "intr.h": "c"
+        "intr.h": "c",
+        "info.h": "c",
+        "debug.h": "c"
     }
 }
